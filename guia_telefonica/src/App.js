@@ -9,14 +9,23 @@ const App = () => {
   const handleChangeName = (event) => {
     setNewName(event.target.value);
   }
-  
+
   const handleSubmitAddPerson = (event) => {
     event.preventDefault();
-    let newPerson = {
-      name: newName
+    if (isExisting(newName)){
+      alert( newName + " is already added to phonebook");
+    }else{
+      let newPerson = {
+        name: newName
+      }
+      setPersons([...persons, newPerson]);
+      event.target.reset(); //resetear
     }
-    setPersons([...persons, newPerson]);
-    event.target.reset(); //resetear
+  }
+
+  const isExisting = (name) => {
+    let search = persons.find(person => person.name === name);
+    return search !== undefined ? true : false;
   }
 
   return (
@@ -31,7 +40,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(person => <p>{person.name}</p>)}
+      {persons.map(person => <p key={person.name}>{person.name}</p>)}
     </div>
   )
 }
