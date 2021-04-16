@@ -1,4 +1,6 @@
 const Part = ({part}) => {
+
+    
     return (
         <div>
             <p><b>ID Part: </b>{part.id}</p>
